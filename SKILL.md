@@ -1,9 +1,9 @@
 ---
 name: withings-family
 description: Fetches health data from the Withings API for multiple family members including weight, body composition (fat, muscle, bone, water), activity, and sleep. Use this skill when the user asks about their or their family's Withings data, weight history, body metrics, daily steps, sleep quality, or any health measurement from Withings devices.
-version: 1.3.0
+version: 1.0.0
 homepage: https://developer.withings.com/
-metadata: {"clawdbot":{"emoji":"⚖️","requires":{"bins":["python3"],"env":["WITHINGS_CLIENT_ID","WITHINGS_CLIENT_SECRET"]},"primaryEnv":"WITHINGS_CLIENT_ID"}}
+metadata: {"clawdbot":{"emoji":"⚖️","requires":{"bins":["python3"],"env":["WITHINGS_CLIENT_ID","WITHINGS_CLIENT_SECRET"]}}}
 ---
 
 This skill allows you to interact with Withings accounts for **multiple family members** to retrieve comprehensive health metrics from Withings devices (smart scales, sleep analyzers, activity trackers, etc.).
@@ -21,9 +21,9 @@ tokens-charlie.json
 Each family member authenticates once via OAuth. Their tokens are stored separately and refreshed automatically. No token copying or switching required — just pass the user ID as the first argument.
 
 ```bash
-python3 withings.py alice weight
-python3 withings.py bob sleep
-python3 withings.py charlie activity
+python3 scripts/withings.py alice weight
+python3 scripts/withings.py bob sleep
+python3 scripts/withings.py charlie activity
 ```
 
 ## When to Use This Skill
@@ -81,9 +81,9 @@ WITHINGS_CLIENT_SECRET=your_client_secret_here
 
 ## Configuration
 
-The skill provides two scripts:
-- **`withings_oauth_local.py`** — Automatic OAuth with local callback server (recommended)
-- **`withings.py`** — Main CLI + manual OAuth
+The skill provides two scripts (in `scripts/`):
+- **`scripts/withings_oauth_local.py`** — Automatic OAuth with local callback server (recommended)
+- **`scripts/withings.py`** — Main CLI + manual OAuth
 
 **Credentials location:** `~/.clawdbot/withings-family/`
 - `.env` — Client ID/Secret (optional, can use ENV vars instead)
@@ -98,12 +98,12 @@ Before any data retrieval, check if the user is authenticated. If an error menti
 Uses a local callback server to capture the code automatically:
 
 ```bash
-python3 {baseDir}/withings_oauth_local.py <userId>
+python3 {baseDir}/scripts/withings_oauth_local.py <userId>
 ```
 
 Example:
 ```bash
-python3 {baseDir}/withings_oauth_local.py alice
+python3 {baseDir}/scripts/withings_oauth_local.py alice
 ```
 
 The script will:
@@ -128,12 +128,12 @@ python3 {baseDir}/withings.py <userId> <command> [options]
 
 First-time setup for a user — generates the OAuth URL:
 ```bash
-python3 {baseDir}/withings.py alice auth
+python3 {baseDir}/scripts/withings.py alice auth
 ```
 
 After the user visits the URL and gets the authorization code:
 ```bash
-python3 {baseDir}/withings.py alice auth YOUR_CODE_HERE
+python3 {baseDir}/scripts/withings.py alice auth YOUR_CODE_HERE
 ```
 
 Repeat for each family member who needs access.
@@ -142,7 +142,7 @@ Repeat for each family member who needs access.
 
 Retrieve the latest weight measurements:
 ```bash
-python3 {baseDir}/withings.py alice weight
+python3 {baseDir}/scripts/withings.py alice weight
 ```
 
 Returns the 5 most recent weight entries in JSON format.
@@ -159,7 +159,7 @@ Returns the 5 most recent weight entries in JSON format.
 
 Retrieve comprehensive body metrics (fat, muscle, bone, water, BMI):
 ```bash
-python3 {baseDir}/withings.py alice body
+python3 {baseDir}/scripts/withings.py alice body
 ```
 
 Returns the 5 most recent body composition measurements.
@@ -183,12 +183,12 @@ Returns the 5 most recent body composition measurements.
 
 Retrieve daily activity data (steps, distance, calories):
 ```bash
-python3 {baseDir}/withings.py alice activity
+python3 {baseDir}/scripts/withings.py alice activity
 ```
 
 Optionally specify the number of days (default: 7):
 ```bash
-python3 {baseDir}/withings.py alice activity 30
+python3 {baseDir}/scripts/withings.py alice activity 30
 ```
 
 **Example output:**
@@ -211,12 +211,12 @@ python3 {baseDir}/withings.py alice activity 30
 
 Retrieve sleep data and quality:
 ```bash
-python3 {baseDir}/withings.py alice sleep
+python3 {baseDir}/scripts/withings.py alice sleep
 ```
 
 Optionally specify the number of days (default: 7):
 ```bash
-python3 {baseDir}/withings.py alice sleep 14
+python3 {baseDir}/scripts/withings.py alice sleep 14
 ```
 
 **Example output:**
@@ -242,8 +242,8 @@ Common errors and how to resolve them:
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| "No token found" | User not authenticated | Run `python3 withings.py <userId> auth` and follow the OAuth flow |
-| "Failed to refresh token" | Token expired and refresh failed | Re-authenticate with `python3 withings.py <userId> auth` |
+| "No token found" | User not authenticated | Run `python3 scripts/withings.py <userId> auth` and follow the OAuth flow |
+| "Failed to refresh token" | Token expired and refresh failed | Re-authenticate with `python3 scripts/withings.py <userId> auth` |
 | "API Error Status: 401" | Invalid or expired credentials | Check your CLIENT_ID and CLIENT_SECRET, re-authenticate |
 | "API Error Status: 503" | Withings API temporarily unavailable | Wait and retry later |
 | Empty data | No measurements in the requested period | User needs to sync their Withings device |
