@@ -137,7 +137,7 @@ def run_callback_server(host: str, port: int, timeout_s: int) -> Tuple[Optional[
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Withings OAuth local callback helper")
-    ap.add_argument("user_id", help="User ID (e.g. oliver, sylvia, elise, erika)")
+    ap.add_argument("user_id", help="User ID (e.g. alice, bob, charlie)")
     ap.add_argument("--timeout", type=int, default=300, help="Seconds to wait for callback")
     ap.add_argument("--port", type=int, default=18081, help="Callback server port")
 

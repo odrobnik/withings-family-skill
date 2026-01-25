@@ -3,7 +3,7 @@ name: withings-family
 description: Fetches health data from the Withings API for multiple family members including weight, body composition (fat, muscle, bone, water), activity, and sleep. Use this skill when the user asks about their or their family's Withings data, weight history, body metrics, daily steps, sleep quality, or any health measurement from Withings devices.
 version: 1.3.0
 homepage: https://developer.withings.com/
-metadata: {"clawdbot":{"emoji":"⚖️","requires":{"bins":["python3"],"env":["WITHINGS_CLIENT_ID","WITHINGS_CLIENT_SECRET"]}}}
+metadata: {"clawdbot":{"emoji":"⚖️","requires":{"bins":["python3"],"env":["WITHINGS_CLIENT_ID","WITHINGS_CLIENT_SECRET"]},"primaryEnv":"WITHINGS_CLIENT_ID"}}
 ---
 
 This skill allows you to interact with Withings accounts for **multiple family members** to retrieve comprehensive health metrics from Withings devices (smart scales, sleep analyzers, activity trackers, etc.).
@@ -13,18 +13,17 @@ This skill allows you to interact with Withings accounts for **multiple family m
 This skill natively supports multiple users with per-user token files:
 
 ```
-tokens-oliver.json
-tokens-sylvia.json
-tokens-elise.json
-tokens-erika.json
+tokens-alice.json
+tokens-bob.json
+tokens-charlie.json
 ```
 
 Each family member authenticates once via OAuth. Their tokens are stored separately and refreshed automatically. No token copying or switching required — just pass the user ID as the first argument.
 
 ```bash
-python3 withings.py oliver weight
-python3 withings.py sylvia sleep
-python3 withings.py elise activity
+python3 withings.py alice weight
+python3 withings.py bob sleep
+python3 withings.py charlie activity
 ```
 
 ## When to Use This Skill
@@ -88,7 +87,7 @@ The skill provides two scripts:
 
 **Credentials location:** `~/.clawdbot/withings-family/`
 - `.env` — Client ID/Secret (optional, can use ENV vars instead)
-- `tokens-oliver.json`, `tokens-sylvia.json`, etc. — OAuth tokens (mode 600)
+- `tokens-<userId>.json` — OAuth tokens per user (mode 600)
 
 Before any data retrieval, check if the user is authenticated. If an error mentions "No token found", guide the user through the initial authentication process for that specific user.
 
@@ -104,7 +103,7 @@ python3 {baseDir}/withings_oauth_local.py <userId>
 
 Example:
 ```bash
-python3 {baseDir}/withings_oauth_local.py erika
+python3 {baseDir}/withings_oauth_local.py alice
 ```
 
 The script will:
@@ -129,12 +128,12 @@ python3 {baseDir}/withings.py <userId> <command> [options]
 
 First-time setup for a user — generates the OAuth URL:
 ```bash
-python3 {baseDir}/withings.py oliver auth
+python3 {baseDir}/withings.py alice auth
 ```
 
 After the user visits the URL and gets the authorization code:
 ```bash
-python3 {baseDir}/withings.py oliver auth YOUR_CODE_HERE
+python3 {baseDir}/withings.py alice auth YOUR_CODE_HERE
 ```
 
 Repeat for each family member who needs access.
@@ -143,7 +142,7 @@ Repeat for each family member who needs access.
 
 Retrieve the latest weight measurements:
 ```bash
-python3 {baseDir}/withings.py oliver weight
+python3 {baseDir}/withings.py alice weight
 ```
 
 Returns the 5 most recent weight entries in JSON format.
@@ -160,7 +159,7 @@ Returns the 5 most recent weight entries in JSON format.
 
 Retrieve comprehensive body metrics (fat, muscle, bone, water, BMI):
 ```bash
-python3 {baseDir}/withings.py oliver body
+python3 {baseDir}/withings.py alice body
 ```
 
 Returns the 5 most recent body composition measurements.
@@ -184,12 +183,12 @@ Returns the 5 most recent body composition measurements.
 
 Retrieve daily activity data (steps, distance, calories):
 ```bash
-python3 {baseDir}/withings.py oliver activity
+python3 {baseDir}/withings.py alice activity
 ```
 
 Optionally specify the number of days (default: 7):
 ```bash
-python3 {baseDir}/withings.py oliver activity 30
+python3 {baseDir}/withings.py alice activity 30
 ```
 
 **Example output:**
@@ -212,12 +211,12 @@ python3 {baseDir}/withings.py oliver activity 30
 
 Retrieve sleep data and quality:
 ```bash
-python3 {baseDir}/withings.py oliver sleep
+python3 {baseDir}/withings.py alice sleep
 ```
 
 Optionally specify the number of days (default: 7):
 ```bash
-python3 {baseDir}/withings.py oliver sleep 14
+python3 {baseDir}/withings.py alice sleep 14
 ```
 
 **Example output:**

@@ -295,11 +295,11 @@ def main():
         print("Usage: python3 withings.py [userId] <command> [params]")
         print("Commands: auth [code], weight, body [limit|all], activity [days], sleep [days]")
         print("\nExamples:")
-        print("  python3 withings.py oliver auth")
-        print("  python3 withings.py oliver auth CODE_HERE")
-        print("  python3 withings.py sylvia weight")
-        print("  python3 withings.py elise body all")
-        print("  python3 withings.py oliver activity 30")
+        print("  python3 withings.py alice auth")
+        print("  python3 withings.py alice auth CODE_HERE")
+        print("  python3 withings.py bob weight")
+        print("  python3 withings.py charlie body all")
+        print("  python3 withings.py alice activity 30")
 
 
 if __name__ == '__main__':
