@@ -3,7 +3,7 @@ name: withings-family
 description: Fetches health data from the Withings API for multiple family members including weight, body composition (fat, muscle, bone, water), activity, and sleep. Use this skill when the user asks about their or their family's Withings data, weight history, body metrics, daily steps, sleep quality, or any health measurement from Withings devices.
 version: 1.0.1
 homepage: https://developer.withings.com/
-metadata: {"clawdbot":{"emoji":"⚖️","requires":{"bins":["python3"],"env":["WITHINGS_CLIENT_ID","WITHINGS_CLIENT_SECRET"]}}}
+metadata: {"moltbot":{"emoji":"⚖️","requires":{"bins":["python3"],"env":["WITHINGS_CLIENT_ID","WITHINGS_CLIENT_SECRET"]}}}
 ---
 
 This skill allows you to interact with Withings accounts for **multiple family members** to retrieve comprehensive health metrics from Withings devices (smart scales, sleep analyzers, activity trackers, etc.).
