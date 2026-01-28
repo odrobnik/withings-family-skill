@@ -1,4 +1,4 @@
-# Withings Family (Clawdbot Skill)
+# Withings Family (Moltbot Skill)
 
 Fetch health data from the Withings API for multiple family members (weight, body metrics, activity, sleep).
 
@@ -21,7 +21,7 @@ Recommended (auto OAuth callback):
 python3 scripts/withings_oauth_local.py <userId>
 ```
 
-Tokens are stored per-user in `~/.clawdbot/withings-family/tokens-<userId>.json`.
+Tokens are stored per-user in `~/.moltbot/withings-family/tokens-<userId>.json`.
 
 ## Requirements
 
