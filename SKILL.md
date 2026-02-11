@@ -1,7 +1,7 @@
 ---
 name: withings-family
 description: Fetches health data from the Withings API for multiple family members including weight, body composition (fat, muscle, bone, water), activity, and sleep. Use this skill when the user asks about their or their family's Withings data, weight history, body metrics, daily steps, sleep quality, or any health measurement from Withings devices.
-version: 1.0.1
+version: 1.0.2
 homepage: https://developer.withings.com/
 metadata: {"openclaw": {"emoji": "⚖️", "requires": {"bins": ["python3"], "env": ["WITHINGS_CLIENT_ID", "WITHINGS_CLIENT_SECRET"]}}}
 ---
@@ -73,7 +73,7 @@ export WITHINGS_CLIENT_ID="your_client_id_here"
 export WITHINGS_CLIENT_SECRET="your_client_secret_here"
 ```
 
-Or create a `.env` file in `~/.moltbot/withings-family/.env`:
+Or create a `.env` file in `~/.openclaw/withings-family/.env` (legacy: `~/.moltbot/withings-family/.env`):
 ```
 WITHINGS_CLIENT_ID=your_client_id_here
 WITHINGS_CLIENT_SECRET=your_client_secret_here
@@ -85,7 +85,7 @@ The skill provides two scripts (in `scripts/`):
 - **`scripts/withings_oauth_local.py`** — Automatic OAuth with local callback server (recommended)
 - **`scripts/withings.py`** — Main CLI + manual OAuth
 
-**Credentials location:** `~/.moltbot/withings-family/`
+**Credentials location:** `~/.openclaw/withings-family/` (legacy: `~/.moltbot/withings-family/`)
 - `.env` — Client ID/Secret (optional, can use ENV vars instead)
 - `tokens-<userId>.json` — OAuth tokens per user (mode 600)
 
