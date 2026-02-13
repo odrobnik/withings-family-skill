@@ -35,3 +35,8 @@ Version is declared in `SKILL.md`. Tag releases (e.g. `v1.0.2`) and publish:
 ```bash
 clawhub publish . --slug withings-family --name "Withings Family" --version 1.0.2 --registry "https://auth.clawdhub.com"
 ```
+
+## Documentation
+
+- [SKILL.md](SKILL.md) — agent-facing reference (commands, behavior, limitations)
+- [ClawHub](https://www.clawhub.com/skills/withings-family) — install via ClawHub registry
